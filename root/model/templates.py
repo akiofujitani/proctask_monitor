@@ -35,6 +35,7 @@ config = '''
     "operation_start_time": "00:05:00",
     "operation_end_time": "23:59:59",
     "start_delay": "10",
+    "start_min": "0",    
     "pause_time": "300"
 }
 '''

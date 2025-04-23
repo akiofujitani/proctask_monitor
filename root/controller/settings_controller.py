@@ -159,10 +159,12 @@ class SettingsController:
         self.frame.wait_window(self.treeview_add)
         process_values = self.treeview_add_controller.get_process()
         if process_values:
-            process_edited = ProcessInit.init_dict(self.process_dict(process_values))
-            answer = askquestion('Process edit', 'Changes were made in Process. \nDo you want replace it?')
-            if answer == 'yes':        
-                self.configuration.replace_process(ProcessInit.init_dict(self.process_dict(process)), process_edited)
+            if not process_values[0] == process[0] or not process_values[1] == process[1] or not process_values[2] == process[2]:
+                answer = askquestion('Process edit', 'Changes were made in Process. \nDo you want replace it?')
+                if answer == 'yes':
+                    process_edited = ProcessInit.init_dict(self.process_dict(process_values))                    
+                    self.configuration.replace_process(ProcessInit.init_dict(self.process_dict(process)), process_edited)
+                    self.fill_entries()
 
     def treeview_remove_command(self, event=None) -> None:
         '''
@@ -171,7 +173,6 @@ class SettingsController:
         '''
         process = self.treeview.item(self.treeview.selection()[0]).get('values')
         self.configuration.remove_process(ProcessInit.init_dict(self.process_dict(process)))
-        self.clear()
         self.fill_entries()      
 
     def cancel_command(self, event=None) -> None:

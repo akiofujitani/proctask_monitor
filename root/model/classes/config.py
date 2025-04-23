@@ -58,6 +58,7 @@ class Configuration:
             for process in self.process_list:
                 if new_process.__eq__(process):
                     raise Exception('Process already exists.')
+            self.process_list.append(new_process)
             return True
         except Exception as error:
             logger.warning(f'Could not add process due {error}')

@@ -49,7 +49,7 @@ class Model():
         '''
         Temporary pause
         '''
-        self.stop_routine
+        self.stop_routine()
         configuration = self.database.get('config')
         self.event.clear()
         self.thread = Thread(target=proctask_monitor, args=(self.database, self.event, configuration.pause_time), name=self.routine_name)
